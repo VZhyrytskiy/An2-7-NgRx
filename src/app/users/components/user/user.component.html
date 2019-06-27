@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+    <div class="panel-heading">User</div>
+    <div class="panel-body">
+        <ul>
+            <li>FirstName: {{user.firstName}}</li>
+            <li>LastName: {{user.lastName}}</li>
+        </ul>
+        <button class="btn btn-warning btn-sm"
+            (click)="onEditUser()">
+            Edit
+        </button>
+        <button class="btn btn-danger btn-sm"
+            (click)="onDeleteUser()">
+            Delete
+        </button>
+    </div>
+</div>

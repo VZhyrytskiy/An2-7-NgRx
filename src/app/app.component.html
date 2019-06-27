@@ -1,0 +1,56 @@
+<div>
+    <div>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <!--routerLink one-time binding-->
+              <a class="navbar-brand" routerLink="/home">Task Manager</a>
+            </div>
+
+            <div>
+              <ul class="nav navbar-nav">
+                <li routerLinkActive="active">
+                  <a routerLink="/users">Users</a>
+                </li>
+
+                <li routerLinkActive="active">
+                  <a routerLink="/admin">Admin</a>
+                </li>
+
+                <li routerLinkActive="active">
+                  <a routerLink="/login">Login</a>
+                </li>
+
+                <li routerLinkActive="active">
+                  <!--routerLink one-time binding-->
+                  <a routerLink="/about">About</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container">
+          <app-spinner *ngIf="spinnerService.isVisible()"></app-spinner>
+          <div class="col-md-10">
+            <router-outlet
+              (activate)='onActivate($event)'
+              (deactivate)='onDeactivate($event)'>
+          </router-outlet>
+          <!-- Routed views go here -->
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-success"
+                    *ngIf="!messagesService.isDisplayed"
+                    (click)="onDisplayMessages()">Show Messages</button>
+            <router-outlet name="messages"></router-outlet>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="row">
+  <h4 class="col-md-10">Message Log</h4>
+  <span class="col-md-2">
+    <a class="btn btn-default" (click)="onClose()">x</a>
+  </span>
+</div>
+<div>
+  <textarea [(ngModel)]="message"></textarea>
+</div>
+<div>
+  <button type="button" class="btn btn-primary" (click)="onSend()">Send</button>
+</div>
+<div *ngFor="let message of messagesService.getMessages()" class="message-row">
+    {{message}}
+</div>
+

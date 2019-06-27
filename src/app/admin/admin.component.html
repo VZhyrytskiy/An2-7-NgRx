@@ -1,0 +1,21 @@
+<h3>Admin</h3>
+<nav>
+  <ul class="nav nav-tabs">
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="./"
+         queryParamsHandling="preserve"
+         preserveFragment>Dashboard</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="./tasks"
+         queryParamsHandling="preserve"
+         preserveFragment>Manage Tasks</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="./users"
+         queryParamsHandling="preserve"
+         preserveFragment>Manage Users</a>
+    </li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>

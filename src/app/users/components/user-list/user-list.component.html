@@ -1,0 +1,10 @@
+<app-user 
+  *ngFor='let user of users$ | async' 
+  [user]="user"
+  [class.edited]="isEdited(user)"
+  (editUser)="onEditUser($event)"
+  (deleteUser)="onDeleteUser($event)">
+</app-user>
+
+
+
