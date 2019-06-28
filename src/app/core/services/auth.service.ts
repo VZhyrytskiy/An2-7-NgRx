@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
-import { CoreModule } from '../core.module';
 
 @Injectable({
-  providedIn: CoreModule
+  providedIn: 'root'
 })
 export class AuthService {
   isLoggedIn = false;
@@ -14,7 +13,10 @@ export class AuthService {
   redirectUrl: string;
 
   login(): Observable<boolean> {
-    return of(true).pipe(delay(1000), tap(val => (this.isLoggedIn = val)));
+    return of(true).pipe(
+      delay(1000),
+      tap(val => (this.isLoggedIn = val))
+    );
   }
 
   logout(): void {

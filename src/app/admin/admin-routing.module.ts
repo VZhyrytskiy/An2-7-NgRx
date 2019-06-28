@@ -29,15 +29,15 @@ const routes: Routes = [
   }
 ];
 
-export const adminRouterComponents = [
-  AdminComponent,
-  AdminDashboardComponent,
-  ManageTasksComponent,
-  ManageUsersComponent
-];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule {}
+export class AdminRoutingModule {
+  static components = [
+    AdminComponent,
+    AdminDashboardComponent,
+    ManageTasksComponent,
+    ManageUsersComponent
+  ];
+}

@@ -7,8 +7,8 @@ import { delay, map, catchError, finalize, take } from 'rxjs/operators';
 
 import { UserObservableService } from './../services';
 import { UserModel } from './../models/user.model';
-import { SpinnerService } from './../../core';
 import { UsersServicesModule } from '../users-services.module';
+import { SpinnerService } from './../../widgets';
 
 @Injectable({
   providedIn: UsersServicesModule

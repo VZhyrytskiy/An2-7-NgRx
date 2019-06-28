@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,14 +8,13 @@ import { Router } from '@angular/router';
 // index.html and you want to set base tag
 // import { APP_BASE_HREF } from '@angular/common';
 
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { TasksModule } from './tasks/tasks.module';
 import { AppRoutingModule } from './app-routing.module';
+import { SpinnerModule } from './widgets/spinner/spinner.module';
 
 import { AppComponent } from './app.component';
-import { MyInterceptor } from './core/interceptors/my.interceptor';
+import { httpInterceptorProviders } from './core/interceptors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,27 +22,20 @@ import { MyInterceptor } from './core/interceptors/my.interceptor';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    CoreModule,
-    SharedModule,
     LayoutModule,
     TasksModule,
-    AppRoutingModule,
+    SpinnerModule.forRoot(),
+    AppRoutingModule
   ],
-  providers: [
-    // add this line if you don't have access to
-    // index.html and you want to set base tag
-    // { provide: APP_BASE_HREF, useValue: '/' }
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: MyInterceptor,
-      multi: true,
-    }
-  ],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   // Diagnostic only: inspect router configuration
   constructor(router: Router) {
-    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+    const replacer = (key: string, value: any): string =>
+      typeof value === 'function' ? value.name : value;
+
+    // console.log('Routes: ', JSON.stringify(router.config, replacer, 2));
   }
 }

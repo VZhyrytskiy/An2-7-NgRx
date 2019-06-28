@@ -16,7 +16,7 @@ export class TaskPromiseService {
     return this.http
       .get(this.tasksUrl)
       .toPromise()
-      .then(response => <TaskModel[]>response)
+      .then(response => response as TaskModel[])
       .catch(this.handleError);
   }
 
@@ -26,35 +26,35 @@ export class TaskPromiseService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => <TaskModel>response)
+      .then(response => response as TaskModel)
       .catch(this.handleError);
   }
 
   updateTask(task: TaskModel): Promise<TaskModel> {
-    const url = `${this.tasksUrl}/${task.id}`,
-      body = JSON.stringify(task),
-      options = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      };
+    const url = `${this.tasksUrl}/${task.id}`;
+    const body = JSON.stringify(task);
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
     return this.http
       .put(url, body, options)
       .toPromise()
-      .then(response => <TaskModel>response)
+      .then(response => response as TaskModel)
       .catch(this.handleError);
   }
 
   createTask(task: TaskModel): Promise<TaskModel> {
-    const url = this.tasksUrl,
-      body = JSON.stringify(task),
-      options = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      };
+    const url = this.tasksUrl;
+    const body = JSON.stringify(task);
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
     return this.http
       .post(url, body, options)
       .toPromise()
-      .then(response => <TaskModel>response)
+      .then(response => response as TaskModel)
       .catch(this.handleError);
   }
 

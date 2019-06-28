@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { Location } from '@angular/common';
 
 // rxjs
@@ -63,7 +63,11 @@ export class UserFormComponent implements OnInit, CanComponentDeactivate {
     this.location.back();
   }
 
-  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+  canDeactivate():
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
     const flags = Object.keys(this.originalUser).map(key => {
       if (this.originalUser[key] === this.user[key]) {
         return true;

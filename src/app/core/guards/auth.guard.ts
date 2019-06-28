@@ -7,15 +7,16 @@ import {
   NavigationExtras,
   Route,
   Router,
-  RouterStateSnapshot
+  RouterStateSnapshot,
+  UrlTree,
+  UrlSegment
 } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { CoreModule } from '../core.module';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
-  providedIn: CoreModule
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
@@ -23,8 +24,12 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('CanActivate Guard is called');
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    console.log('CanActivateGuard is called');
     const { url } = state;
     return this.checkLogin(url);
   }
@@ -32,20 +37,24 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
     console.log('CanActivateChild Guard is called');
     const { url } = state;
     return this.checkLogin(url);
   }
 
-  canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
+  canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
     console.log('CanLoad Guard is activated');
     const url = `/${route.path}`;
 
-    return this.checkLogin(url);
+    return this.checkLogin(url) as boolean;
   }
 
-  private checkLogin(url: string): boolean {
+  private checkLogin(url: string): boolean | UrlTree {
     if (this.authService.isLoggedIn) {
       return true;
     }
@@ -65,7 +74,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
     // Navigate to the login page with extras
     this.router.navigate(['/login'], navigationExtras);
-
     return false;
   }
 }

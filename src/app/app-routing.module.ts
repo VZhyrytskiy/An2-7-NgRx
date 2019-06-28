@@ -23,12 +23,12 @@ const routes: Routes = [
   {
     path: 'admin',
     canLoad: [AuthGuard],
-    loadChildren: './admin/admin.module#AdminModule',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     data: { title: 'Admin' }
   },
   {
     path: 'users',
-    loadChildren: './users/users.module#UsersModule',
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
     data: {
       preload: true,
       title: 'Users'

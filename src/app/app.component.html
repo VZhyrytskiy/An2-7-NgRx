@@ -39,11 +39,13 @@
         <div class="container">
           <app-spinner *ngIf="spinnerService.isVisible()"></app-spinner>
           <div class="col-md-10">
+            <!-- #routerOutlet="outlet" - access to the properties of router-outlet directive -->
             <router-outlet
-              (activate)='onActivate($event)'
-              (deactivate)='onDeactivate($event)'>
-          </router-outlet>
-          <!-- Routed views go here -->
+                #routerOutlet="outlet"
+                (activate)='onActivate($event, routerOutlet)'
+                (deactivate)='onDeactivate($event, routerOutlet)'>
+            </router-outlet>
+            <!-- Routed views go here -->
           </div>
           <div class="col-md-2">
             <button class="btn btn-success"
