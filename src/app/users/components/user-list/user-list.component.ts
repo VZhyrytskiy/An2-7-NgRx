@@ -27,6 +27,15 @@ export class UserListComponent implements OnInit {
     this.users$ = this.userObservableService.getUsers();
 
     // listen editedUserID from UserFormComponent
+    const observer = {
+      next: (user: UserModel) => {
+        this.editedUser = { ...user };
+        console.log(
+          `Last time you edited user ${JSON.stringify(this.editedUser)}`
+        );
+      },
+      error: (err: any) => console.log(err)
+    };
     this.route.paramMap
       .pipe(
         switchMap((params: ParamMap) => {
@@ -35,15 +44,7 @@ export class UserListComponent implements OnInit {
             : of(null);
         })
       )
-      .subscribe(
-        (user: UserModel) => {
-          this.editedUser = { ...user };
-          console.log(
-            `Last time you edited user ${JSON.stringify(this.editedUser)}`
-          );
-        },
-        err => console.log(err)
-      );
+      .subscribe(observer);
   }
 
   onEditUser(user: UserModel) {

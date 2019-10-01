@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
   onDisplayMessages(): void {
@@ -85,6 +85,6 @@ export class AppComponent implements OnInit, OnDestroy {
         filter(route => route.outlet === 'primary'),
         switchMap(route => route.data)
       )
-      .subscribe(data => this.titleService.setTitle(data['title']));
+      .subscribe(data => this.titleService.setTitle(data.title));
   }
 }
