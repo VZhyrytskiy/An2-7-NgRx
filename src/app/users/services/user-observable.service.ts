@@ -12,10 +12,9 @@ import { concatMap, catchError, retry, publish, refCount, share } from 'rxjs/ope
 
 import { UserModel } from './../models/user.model';
 import { UsersAPI } from './../users.config';
-import { UsersServicesModule } from '../users-services.module';
 
 @Injectable({
-  providedIn: UsersServicesModule
+  providedIn: 'any'
 })
 export class UserObservableService {
   constructor(
@@ -37,7 +36,7 @@ export class UserObservableService {
 
     return this.http.get<UserModel>(url).pipe(
       retry(3),
-      share(),
+      share(), // = publish() + refCount()
       catchError(this.handleError)
     );
   }

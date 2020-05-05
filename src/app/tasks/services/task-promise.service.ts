@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { TaskModel } from './../models/task.model';
-import { TasksServicesModule } from '../tasks-services.module';
 
 @Injectable({
-  providedIn: TasksServicesModule
+  providedIn: 'any'
 })
 export class TaskPromiseService {
   private tasksUrl = 'http://localhost:3000/tasks';
