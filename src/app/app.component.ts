@@ -49,14 +49,14 @@ export class AppComponent implements OnInit, OnDestroy {
    * @param $event - component instance
    */
   onActivate($event: any, routerOutlet: RouterOutlet) {
-    // console.log('Activated Component', $event, routerOutlet);
+    console.log('Activated Component', $event, routerOutlet);
     // another way to set titles
     this.titleService.setTitle(routerOutlet.activatedRouteData.title);
     this.metaService.addTags(routerOutlet.activatedRouteData.meta);
   }
 
   onDeactivate($event: any, routerOutlet: RouterOutlet) {
-    // console.log('Deactivated Component', $event, routerOutlet);
+    console.log('Deactivated Component', $event, routerOutlet);
   }
 
   private setPageTitles() {

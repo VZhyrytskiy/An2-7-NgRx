@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from './spinner.component';
 import { SpinnerService } from './spinner.service';
@@ -11,8 +11,8 @@ import { SpinnerService } from './spinner.service';
 export class SpinnerModule {
   static forRoot(): ModuleWithProviders<SpinnerModule> {
     return {
-        ngModule: SpinnerModule,
-        providers: [SpinnerService]
+      ngModule: SpinnerModule,
+      providers: [SpinnerService]
     };
-}
+  }
 }
