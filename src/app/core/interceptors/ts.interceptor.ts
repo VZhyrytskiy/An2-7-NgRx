@@ -18,7 +18,7 @@ export class TsInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log(`Request Interceptor:`);
+    // console.log(`Request Interceptor:`);
 
     // request interceptor
     let clonedRequest;
@@ -28,7 +28,7 @@ export class TsInterceptor implements HttpInterceptor {
         // clear the body
         // body: null
       });
-      console.log(clonedRequest);
+      // console.log(clonedRequest);
     } else {
       clonedRequest = req;
     }
@@ -39,9 +39,9 @@ export class TsInterceptor implements HttpInterceptor {
       map((event: HttpResponse<any>) => {
         // do stuff with response
         if (event.url.includes('users')) {
-          console.log('Response Interceptor:');
-          console.log(event);
-          console.log(event.body);
+          // console.log('Response Interceptor:');
+          // console.log(event);
+          // console.log(event.body);
         }
         return event;
       })
