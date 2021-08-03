@@ -36,12 +36,12 @@ export class TsInterceptor implements HttpInterceptor {
     // response interceptor
     return next.handle(clonedRequest).pipe(
       filter((event: HttpEvent<any>) => event.type === HttpEventType.Response),
-      map((event: HttpResponse<any>) => {
+      map((event: HttpEvent<any>) => {
         // do stuff with response
-        if (event.url.includes('users')) {
-          // console.log('Response Interceptor:');
-          // console.log(event);
-          // console.log(event.body);
+        if ((event as HttpResponse<any>).url!.includes('users')) {
+          console.log('Response Interceptor:');
+          console.log(event);
+          console.log((event as HttpResponse<any>).body);
         }
         return event;
       })

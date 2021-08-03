@@ -4,17 +4,17 @@
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <a routerLink="./"
          queryParamsHandling="preserve"
-         preserveFragment>Dashboard</a>
+         [preserveFragment]="true">Dashboard</a>
     </li>
     <li routerLinkActive="active">
       <a routerLink="./tasks"
          queryParamsHandling="preserve"
-         preserveFragment>Manage Tasks</a>
+         [preserveFragment]="true">Manage Tasks</a>
     </li>
     <li routerLinkActive="active">
       <a routerLink="./users"
          queryParamsHandling="preserve"
-         preserveFragment>Manage Users</a>
+         [preserveFragment]="true">Manage Users</a>
     </li>
   </ul>
 </nav>

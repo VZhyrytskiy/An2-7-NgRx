@@ -15,14 +15,14 @@ export class MessagesComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  onClose() {
+  onClose(): void {
     this.router.navigate([{ outlets: { messages: null } }]);
     this.messagesService.isDisplayed = false;
   }
 
-  onSend() {
+  onSend(): void {
     if (this.message) {
       this.messagesService.addMessage(this.message);
       this.message = '';

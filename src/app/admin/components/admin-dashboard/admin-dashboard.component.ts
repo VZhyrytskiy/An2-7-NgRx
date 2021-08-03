@@ -10,14 +10,14 @@ import { map } from 'rxjs/operators';
   styleUrls: ['admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  sessionId: Observable<string>;
-  token: Observable<string>;
+  sessionId!: Observable<string>;
+  token!: Observable<string>;
 
   constructor(
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Capture the session ID if available
     this.sessionId = this.route
       .queryParamMap

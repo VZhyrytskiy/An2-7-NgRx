@@ -8,7 +8,7 @@ export class ManageTasksComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 // rxjs
 import { Observable, Subscription } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import {
   AutoUnsubscribe,
@@ -20,11 +20,10 @@ import { UserObservableService } from './../../services';
 })
 @AutoUnsubscribe()
 export class UserFormComponent implements OnInit, CanComponentDeactivate {
-  user: UserModel;
-  originalUser: UserModel;
+  user!: UserModel;
+  originalUser!: UserModel;
 
-  private sub: Subscription;
-
+  private sub!: Subscription;
 
   constructor(
     private userObservableService: UserObservableService,
@@ -37,13 +36,13 @@ export class UserFormComponent implements OnInit, CanComponentDeactivate {
   ngOnInit(): void {
     // data is an observable object
     // which contains custom and resolve data
-    this.route.data.pipe(pluck('user')).subscribe((user: UserModel) => {
+    this.route.data.pipe(map(data => data.user)).subscribe((user: UserModel) => {
       this.user = { ...user };
       this.originalUser = { ...user };
     });
   }
 
-  onSaveUser() {
+  onSaveUser(): void {
     const user = { ...this.user };
 
     const method = user.id ? 'updateUser' : 'createUser';
@@ -60,7 +59,7 @@ export class UserFormComponent implements OnInit, CanComponentDeactivate {
     this.sub = this.userObservableService[method](user).subscribe(observer);
   }
 
-  onGoBack() {
+  onGoBack(): void {
     this.location.back();
   }
 
@@ -69,7 +68,7 @@ export class UserFormComponent implements OnInit, CanComponentDeactivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const flags = Object.keys(this.originalUser).map(key => {
+      const flags = (Object.keys(this.originalUser) as (keyof UserModel)[]).map(key => {
       if (this.originalUser[key] === this.user[key]) {
         return true;
       }

@@ -9,16 +9,16 @@ import { UserModel } from './../../models/user.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserComponent {
-  @Input() user: UserModel;
+  @Input() user!: UserModel;
 
   @Output() editUser = new EventEmitter<UserModel>();
   @Output() deleteUser = new EventEmitter<UserModel>();
 
-  onEditUser() {
+  onEditUser(): void {
     this.editUser.emit(this.user);
   }
 
-  onDeleteUser() {
+  onDeleteUser(): void {
     this.deleteUser.emit(this.user);
   }
 }

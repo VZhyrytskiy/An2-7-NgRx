@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 // rxjs
-import { Observable, of } from 'rxjs';
-import { delay, map, catchError, finalize, take } from 'rxjs/operators';
+import { Observable, of, EMPTY } from 'rxjs';
+import { delay, catchError, take, switchMap, finalize } from 'rxjs/operators';
 
 import { UserObservableService } from './../services';
 import { UserModel } from './../models/user.model';
@@ -19,7 +19,7 @@ export class UserResolveGuard implements Resolve<UserModel> {
     private spinner: SpinnerService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<UserModel | null> {
+  resolve(route: ActivatedRouteSnapshot): Observable<UserModel> {
     console.log('UserResolve Guard is called');
 
     if (!route.paramMap.has('userID')) {
@@ -27,23 +27,23 @@ export class UserResolveGuard implements Resolve<UserModel> {
     }
 
     this.spinner.show();
-    const id = +route.paramMap.get('userID');
+    const id = route.paramMap.get('userID')!;
 
     return this.userObservableService.getUser(id).pipe(
       delay(2000),
-      map((user: UserModel) => {
+      switchMap((user: UserModel) => {
         if (user) {
-          return user;
+          return of(user);
         } else {
           this.router.navigate(['/users']);
-          return null;
+          return EMPTY;
         }
       }),
       take(1),
       catchError(() => {
         this.router.navigate(['/users']);
         // catchError MUST return observable
-        return of(null);
+        return EMPTY;
       }),
       finalize(() => this.spinner.hide())
     );

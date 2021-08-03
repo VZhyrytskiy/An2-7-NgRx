@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 // rxjs
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { TaskModel } from './../../models/task.model';
 import { TaskPromiseService } from './../../services';
@@ -12,7 +12,7 @@ import { TaskPromiseService } from './../../services';
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent implements OnInit {
-  task: TaskModel;
+  task!: TaskModel;
 
   constructor(
     private taskPromiseService: TaskPromiseService,
@@ -32,15 +32,22 @@ export class TaskFormComponent implements OnInit {
     this.route.paramMap
       .pipe(
         switchMap((params: ParamMap) => {
-          return params.get('taskID')
-            ? this.taskPromiseService.getTask(+params.get('taskID'))
-            : Promise.resolve(null);
-        })
+             // notes about "!"
+             // params.get() returns string | null, but getTask takes string | number
+             // in this case taskID is NOT a path param and can not be null
+             if (params.has('taskID')) {
+                return this.taskPromiseService.getTask(params.get('taskID')!);
+             } else {
+                return Promise.resolve(undefined);
+             }
+        }),
+        // transform undefined => {}
+        map(el => el ? el : {} as TaskModel)
       )
       .subscribe(observer);
   }
 
-  onSaveTask() {
+  onSaveTask(): void {
     const task = { ...this.task } as TaskModel;
 
     const method = task.id ? 'updateTask' : 'createTask';

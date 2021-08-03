@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 // rxjs
-import { Observable, of, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { EMPTY, Observable, of, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 import { UserModel } from './../models/user.model';
 
@@ -22,7 +22,10 @@ export class UserArrayService {
 
   getUser(id: number | string): Observable<UserModel> {
     return this.users$.pipe(
-      map((users: Array<UserModel>) => users.find(user => user.id === +id)),
+      switchMap((users: Array<UserModel>) => {
+        const user = users.find(user => user.id === +id);
+        return user ? of(user) : EMPTY;
+      }),
       catchError(err => throwError('Error in getUser method'))
     );
   }

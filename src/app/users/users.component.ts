@@ -11,10 +11,10 @@ export class UsersComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  onCreateUser() {
+  onCreateUser(): void {
     const link = ['/users/add'];
     this.router.navigate(link);
   }

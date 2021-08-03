@@ -8,7 +8,7 @@ export class ManageUsersComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

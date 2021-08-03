@@ -15,7 +15,7 @@ import { TaskModel } from './../../models/task.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskComponent {
-  @Input() task: TaskModel;
+  @Input() task!: TaskModel;
 
   @Output() completeTask = new EventEmitter<TaskModel>();
   @Output() editTask = new EventEmitter<TaskModel>();
@@ -25,7 +25,7 @@ export class TaskComponent {
     this.completeTask.emit(this.task);
   }
 
-  onEditTask() {
+  onEditTask(): void {
     this.editTask.emit(this.task);
   }
 
