@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { TaskModel } from './../models/task.model';
+import type { TaskModel } from './../models/task.model';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class TaskPromiseService {
       .catch(this.handleError);
   }
 
-  getTask(id: number | string): Promise<TaskModel> {
+  getTask(id: NonNullable<TaskModel['id']> | string): Promise<TaskModel> {
     const url = `${this.tasksUrl}/${id}`;
 
     const request$ = this.http.get(url);
@@ -30,11 +30,7 @@ export class TaskPromiseService {
 
   updateTask(task: TaskModel): Promise<TaskModel> {
     const url = `${this.tasksUrl}/${task.id}`;
-    const body = JSON.stringify(task);
-    const options = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    const request$ = this.http.put(url, body, options);
+    const request$ = this.http.put(url, task);
 
     return firstValueFrom(request$)
       .then(response => response as TaskModel)
@@ -43,18 +39,14 @@ export class TaskPromiseService {
 
   createTask(task: TaskModel): Promise<TaskModel> {
     const url = this.tasksUrl;
-    const body = JSON.stringify(task);
-    const options = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    const request$ = this.http.post(url, body, options);
+    const request$ = this.http.post(url, task);
 
     return firstValueFrom(request$)
       .then(response => response as TaskModel)
       .catch(this.handleError);
   }
 
-  deleteTask(task: TaskModel): Promise<TaskModel> {
+  deleteTask(task: TaskModel): Promise<unknown> {
     const url = `${this.tasksUrl}/${task.id}`;
     const request$ = this.http.delete(url);
 

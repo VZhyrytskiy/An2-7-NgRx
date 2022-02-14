@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
+import type { OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import type { RouterOutlet } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { Router, RouterOutlet, NavigationEnd, NavigationStart } from '@angular/router';
-
-// rxjs
-import { Subscription } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { Subscription, filter, map, switchMap } from 'rxjs';
 
 import { MessagesService, CustomPreloadingStrategyService } from './core';
 import { SpinnerService } from './widgets';
@@ -49,14 +48,14 @@ export class AppComponent implements OnInit, OnDestroy {
    * @param $event - component instance
    */
   onActivate($event: any, routerOutlet: RouterOutlet): void {
-    // console.log('Activated Component', $event, routerOutlet);
+    console.log('Activated Component', $event, routerOutlet);
     // another way to set titles
     this.titleService.setTitle(routerOutlet.activatedRouteData.title);
     this.metaService.addTags(routerOutlet.activatedRouteData.meta);
   }
 
   onDeactivate($event: any, routerOutlet: RouterOutlet): void {
-    // console.log('Deactivated Component', $event, routerOutlet);
+    console.log('Deactivated Component', $event, routerOutlet);
   }
 
   private setPageTitles(): void {

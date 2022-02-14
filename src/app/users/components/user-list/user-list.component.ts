@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Component } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import type { ParamMap } from '@angular/router';
 
 // rxjs
-import { EMPTY, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { EMPTY, Observable, switchMap } from 'rxjs';
 
-import { UserModel } from './../../models/user.model';
+import type { UserModel } from './../../models/user.model';
 import { UserObservableService } from './../../services';
 
 @Component({

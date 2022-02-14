@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import type { NavigationExtras } from '@angular/router';
+import type { OnInit, OnDestroy } from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, takeUntil } from 'rxjs';
 
 import { AuthService } from './../../../core';
 

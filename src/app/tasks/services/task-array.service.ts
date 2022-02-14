@@ -18,7 +18,7 @@ export class TaskArrayService {
     return taskListPromise;
   }
 
-  getTask(id: number | string): Promise<TaskModel | undefined> {
+  getTask(id: NonNullable<TaskModel['id']> | string): Promise<TaskModel | undefined> {
     return this.getTasks()
       .then(tasks => tasks.find(task => task.id === +id))
       .catch(() => Promise.reject('Error in getTask method'));

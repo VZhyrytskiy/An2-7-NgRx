@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, ExtraOptions } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import type { Routes, ExtraOptions } from '@angular/router';
 
 import {
   AboutComponent,

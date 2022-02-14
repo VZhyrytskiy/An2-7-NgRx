@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import {
+import { HttpHeaders, HttpEventType } from '@angular/common/http';
+import type {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
-  HttpResponse,
-  HttpParams,
-  HttpEventType
+  HttpResponse
 } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { interceptorTOKEN } from './../../users';
+import type { Observable } from 'rxjs';
+import { filter, map } from 'rxjs';
 
 @Injectable()
 export class TsInterceptor implements HttpInterceptor {
@@ -18,17 +18,22 @@ export class TsInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // console.log(`Request Interceptor:`);
+    console.log(`Request Interceptor:`);
 
     // request interceptor
+    const contextValue = req.context.get(interceptorTOKEN);
+    console.log('contextValue:', contextValue);
+
     let clonedRequest;
-    if (req.url.includes('users')) {
+    if (req.method === 'POST' || (req.method === 'PUT')) {
+      console.log('req.method:', req.method);
       clonedRequest = req.clone({
-        params: new HttpParams().set('ts_interceptor', Date.now().toString())
-        // clear the body
-        // body: null
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'user-token'
+        })
       });
-      // console.log(clonedRequest);
+      console.log(clonedRequest);
     } else {
       clonedRequest = req;
     }
