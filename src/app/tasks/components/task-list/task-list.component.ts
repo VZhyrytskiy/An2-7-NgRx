@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, type OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { TaskPromiseService } from './../../services';
-import type { OnInit } from '@angular/core';
 import type { TaskModel } from './../../models/task.model';
 
 @Component({

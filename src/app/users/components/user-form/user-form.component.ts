@@ -1,16 +1,11 @@
-import { Component  } from '@angular/core';
-import type { OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import type { UrlTree } from '@angular/router';
+import { Component, type OnInit  } from '@angular/core';
+import { ActivatedRoute, Router, type Data, type UrlTree } from '@angular/router';
 import { Location } from '@angular/common';
+import { type Observable, type Subscription, map } from 'rxjs';
 
-import type { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs';
-
-import { AutoUnsubscribe, DialogService } from './../../../core';
-import type { CanComponentDeactivate } from './../../../core';
-import { UserModel } from './../../models/user.model';
+import { AutoUnsubscribe, DialogService, type CanComponentDeactivate } from './../../../core';
 import { UserObservableService } from './../../services';
+import { type UserModel } from './../../models/user.model';
 
 @Component({
   templateUrl: './user-form.component.html',
@@ -34,7 +29,7 @@ export class UserFormComponent implements OnInit, CanComponentDeactivate {
   ngOnInit(): void {
     // data is an observable object
     // which contains custom and resolve data
-    this.route.data.pipe(map(data => data.user)).subscribe((user: UserModel) => {
+    this.route.data.pipe(map((data: Data) => data['user'])).subscribe((user: UserModel) => {
       this.user = { ...user };
       this.originalUser = { ...user };
     });

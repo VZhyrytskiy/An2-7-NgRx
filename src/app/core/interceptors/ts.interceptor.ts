@@ -7,10 +7,9 @@ import type {
   HttpRequest,
   HttpResponse
 } from '@angular/common/http';
+import { type Observable, filter, map } from 'rxjs';
 
 import { interceptorTOKEN } from './../../users';
-import type { Observable } from 'rxjs';
-import { filter, map } from 'rxjs';
 
 @Injectable()
 export class TsInterceptor implements HttpInterceptor {

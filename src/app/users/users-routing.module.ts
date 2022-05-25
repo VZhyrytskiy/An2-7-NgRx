@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { type Routes, RouterModule } from '@angular/router';
 
 import { UsersComponent } from './users.component';
 import { UserListComponent, UserFormComponent } from './components';
 import { UserResolveGuard } from './guards';
-
 import { CanDeactivateGuard } from './../core';
 
 const routes: Routes = [

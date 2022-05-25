@@ -2,12 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import type { Routes, ExtraOptions } from '@angular/router';
 
-import {
-  AboutComponent,
-  MessagesComponent,
-  LoginComponent,
-  PathNotFoundComponent
-} from './layout';
+import { AboutComponent, MessagesComponent, LoginComponent, PathNotFoundComponent } from './layout';
 import { AuthGuard, CustomPreloadingStrategyService } from './core';
 
 const routes: Routes = [

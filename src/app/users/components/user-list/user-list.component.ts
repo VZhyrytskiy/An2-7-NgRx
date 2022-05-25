@@ -1,13 +1,9 @@
-import { Component } from '@angular/core';
-import type { OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import type { ParamMap } from '@angular/router';
+import { Component, type OnInit } from '@angular/core';
+import { Router, ActivatedRoute, type ParamMap } from '@angular/router';
+import { type Observable, EMPTY, switchMap } from 'rxjs';
 
-// rxjs
-import { EMPTY, Observable, switchMap } from 'rxjs';
-
-import type { UserModel } from './../../models/user.model';
 import { UserObservableService } from './../../services';
+import { type UserModel } from './../../models/user.model';
 
 @Component({
   templateUrl: './user-list.component.html',

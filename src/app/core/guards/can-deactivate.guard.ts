@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import type { CanDeactivate, UrlTree } from '@angular/router';
 import type { Observable } from 'rxjs';
+
 import type { CanComponentDeactivate } from './../interfaces/can-component-deactivate.interface';
 
 @Injectable({

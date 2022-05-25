@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { type Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
-import {
-  AdminDashboardComponent,
-  ManageTasksComponent,
-  ManageUsersComponent
-} from './components';
-
+import { AdminDashboardComponent, ManageTasksComponent, ManageUsersComponent } from './components';
 import { AuthGuard } from './../core';
 
 const routes: Routes = [

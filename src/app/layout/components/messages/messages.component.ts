@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import type { OnInit } from '@angular/core';
+import { Component, type OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesService } from '../../../core';
 

@@ -1,13 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpContextToken, HttpContext } from '@angular/common/http';
-import { Observable, throwError, catchError, retry, share, concatMap } from 'rxjs';
-import type { UserModel } from './../models/user.model';
+import { HttpClient, HttpContextToken, HttpContext, type HttpErrorResponse } from '@angular/common/http';
+import { type Observable, throwError, catchError, retry, share, concatMap } from 'rxjs';
+
 import { UsersAPI } from './../users.config';
+import { type UserModel } from './../models/user.model';
 
 export const interceptorTOKEN = new HttpContextToken(() => 'Some Default Value');
-
-import type { HttpErrorResponse } from '@angular/common/http';
-
 
 @Injectable({
   providedIn: 'any'

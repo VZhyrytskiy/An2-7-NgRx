@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router,  } from '@angular/router';
-import type { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-
-// rxjs
-import { Observable, of, EMPTY, catchError, take, switchMap, delay, finalize } from 'rxjs';
+import { Router, type Resolve, type ActivatedRouteSnapshot } from '@angular/router';
+import { type Observable, of, EMPTY, catchError, take, switchMap, delay, finalize } from 'rxjs';
 
 import { UserObservableService } from './../services';
 import { UserModel } from './../models/user.model';
